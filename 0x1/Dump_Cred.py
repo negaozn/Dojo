@@ -11,8 +11,15 @@ def Conexao():
 def Dump():
     conexao = Conexao()
     cursor = conexao.cursor()
-    cursor.execute('select origin_url,username_value,password_value from logins')
-    for linha in cursor.fetchall():
-        print(linha)
+    cursor.execute('select origin_url from logins')
+    if len(cursor.fetchall()) > 0:
+#        print(cursor.fetchall())
+        for linha in cursor.fetchall():
+            print(linha)
+    else:
+        print('Não existe registros')
+
+def Descriptografar():
+    pass
 
 Dump()
