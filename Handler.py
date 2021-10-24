@@ -7,4 +7,13 @@ def Servidor(host = 'localhost' , port = 443):
     server.bind(server_address)
     server.listen(10)
     i = 0
-    
+    while True:
+        client,address = server.accept()
+        data = server.recv()
+        if data:
+            print("Data: %s" % data)
+            client.send(data)
+            print("enviando %s bytes de volta para %s " % (data,address))
+
+
+Servidor()
