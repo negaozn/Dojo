@@ -31,7 +31,6 @@ class Handler:
                     arquivo.write(data.decode('utf-8'))
                     arquivo.close()
 
-
-
-handler = Handler('localhost',8080)
-handler.Servidor()
+if __name__ == "__main__":
+    handler = Handler('localhost',8080)
+    handler.Servidor()
